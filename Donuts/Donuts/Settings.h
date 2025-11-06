@@ -4,10 +4,13 @@
 class Settings
 {
 public:
-	Settings(int height, int width);
+	Settings(int argc, char* argv[]);
 
 	int GetHeight();
 	int GetWidth();
+
+	void TextHelp();
+
 
 private:
 

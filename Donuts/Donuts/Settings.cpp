@@ -1,11 +1,35 @@
 #include "Settings.h"
-#include <iostream>
+#include "pch.h"
 
 
-Settings::Settings(int height, int width)
+Settings::Settings(int argc, char* argv[])
 {
-	mHeight = height;
-	mWidth = width;
+    for (int i = 1; i < argc; ++i)
+    {
+        std::string arg = argv[i];
+
+        if (arg == "-h" && i + 1 < argc)
+        {
+            mHeight = atoi(argv[i + 1]);
+            i++;
+        }
+        else if (arg == "-w" && i + 1 < argc)
+        {
+            mWidth = atoi(argv[i + 1]);
+            i++;
+        }
+        else
+        {
+            TextHelp();
+            return;
+        }
+    }
+
+    if (mHeight == NULL || mWidth == NULL)
+    {
+        TextHelp();
+        return;
+    }
 }
 
 int Settings::GetHeight()
@@ -16,5 +40,13 @@ int Settings::GetHeight()
 int Settings::GetWidth()
 {
 	return mWidth;
+}
+
+void Settings::TextHelp()
+{
+	std::cout << "|=====================|HELP|=======================|" << std::endl;
+	std::cout << "Use " << RED << "-h " << DEFAULT << "for set the height and " << RED << "-w " DEFAULT << "for set the width !" << std::endl;
+	std::cout << "\n";
+	std::cout << GREEN << "[EXEMPLE] -h 20 -w 100" << DEFAULT << std::endl;
 }
 

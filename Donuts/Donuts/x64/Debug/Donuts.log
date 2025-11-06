@@ -1,2 +1,7 @@
 ﻿  Donuts.cpp
-  Donuts.vcxproj -> C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\x64\Debug\Donuts.exe
+  pch.cpp
+  Screen.cpp
+  Settings.cpp
+  Donuts.vcxproj -> C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\x64\Debug\Donuts.exe
+  'pwsh.exe' n'est pas reconnu en tant que commande interne
+  ou externe, un programme exécutable ou un fichier de commandes.
