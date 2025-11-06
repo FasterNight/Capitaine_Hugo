@@ -1,5 +1,5 @@
-#include "Screen.h"
 #include "pch.h"
+#include "Screen.h"
 
 Screen::Screen()
 {

@@ -2,7 +2,17 @@
 
 int main(int argc, char* argv[])
 {
-    Settings settings(argc, argv); // Constructeur du tableau 
-    Screen screen(settings.GetHeight(), settings.GetWidth());
+    Settings settings(argc, argv); // Constructeur des paramètres 
+    Screen screen(settings.GetHeight(), settings.GetWidth()); // Constructeur de l'écran
+
+    std::vector<Vertex> test = {
+            {-1.f, -1.f, 0.f},
+         {-1.f,  1.f, 0.f},
+         { 1.f, -1.f, 0.f},
+         { 1.f,  1.f, 0.f}
+    };
+
+    Mesh mesh(test);
+    mesh.Debug();
 }
 

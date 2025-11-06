@@ -1,5 +1,5 @@
-#include "Settings.h"
 #include "pch.h"
+#include "Settings.h"
 
 
 Settings::Settings(int argc, char* argv[])

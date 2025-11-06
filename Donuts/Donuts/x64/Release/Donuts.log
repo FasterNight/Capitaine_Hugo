@@ -1,11 +1,23 @@
 ﻿  Settings.cpp
-  Donuts.cpp
-  Screen.cpp
-  pch.cpp
-  Génération de code en cours
-  Compiler switch has changed, fall back to full compilation.
-  All 84 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Fin de la génération du code
-  Donuts.vcxproj -> C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\x64\Release\Donuts.exe
-  'pwsh.exe' n'est pas reconnu en tant que commande interne
-  ou externe, un programme exécutable ou un fichier de commandes.
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.h(14,12): error C2039: 'vector' n'est pas membre de 'std'
+  (compiler le fichier source 'Settings.cpp')
+      C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\predefined C++ types (compiler internal)(357,11):
+      voir la déclaration de 'std'
+  
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.h(14,12): error C2061: erreur de syntaxe : identificateur 'vector'
+  (compiler le fichier source 'Settings.cpp')
+  
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.h(19,7): error C2039: 'vector' n'est pas membre de 'std'
+  (compiler le fichier source 'Settings.cpp')
+      C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\predefined C++ types (compiler internal)(357,11):
+      voir la déclaration de 'std'
+  
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.h(19,13): error C2143: erreur de syntaxe : absence de ';' avant '<'
+  (compiler le fichier source 'Settings.cpp')
+  
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.h(19,7): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+  (compiler le fichier source 'Settings.cpp')
+  
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.h(19,29): error C2238: jetons inattendus avant ';'
+  (compiler le fichier source 'Settings.cpp')
+  
