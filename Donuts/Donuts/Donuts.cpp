@@ -1,3 +1,4 @@
+#include "Settings.h"
 #include <iostream>
 
 int main(int argc, char* argv[])
@@ -13,13 +14,12 @@ int main(int argc, char* argv[])
     
     std::cout << "\x1b[?25h\n"; // Rend visible le curseur 
 
-    int h = atoi(argv[1]); // Variable Hauteur 
-    int w = atoi(argv[2]); // Variable Largeur
+    
+    Settings s(atoi(argv[1]), atoi(argv[2])); // Constructeur du tableau 
 
-    std::cout << h << "\n" << w << std::endl;
-    for (int i = 1; i < 20; i++) // Hauteur
+    for (int i = 1; i < s.GetHeight(); i++) // Hauteur
     {
-        for (int j = 1; j < 100; j++) // Largeur 
+        for (int j = 1; j < s.GetWidth(); j++) // Largeur 
         {
             std::cout << ".";
         }
