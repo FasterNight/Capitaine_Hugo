@@ -8,6 +8,7 @@ public:
 
 	int GetHeight();
 	int GetWidth();
+	int GetResolution();
 
 	void TextHelp();
 
@@ -16,6 +17,7 @@ private:
 
 	int mHeight;
 	int mWidth;
+	int mMeshResolution;
 };
 
 

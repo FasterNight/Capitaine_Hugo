@@ -1,6 +1,8 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include "Mesh.h"
+
 class Screen
 {
 
@@ -9,6 +11,7 @@ public:
 	Screen(int height, int width);
 
 	void Display();
+	void Display(Mesh const& mesh);
 	void Clear();
 
 	void SetHeight(int height);

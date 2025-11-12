@@ -14,12 +14,12 @@
 #define BLUE "\x1B[38;2;0;0;255m"
 #define DEFAULT "\x1B[0m"
 
-struct Vertex
-{
-	float x;
-	float y;
-	float z;
-};
+//struct Vertex
+//{
+//	float x;
+//	float y;
+//	float z;
+//};
 
 #endif // !PCH_H
 

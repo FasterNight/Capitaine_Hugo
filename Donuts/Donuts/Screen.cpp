@@ -32,6 +32,11 @@ void Screen::Display()
     }
 }
 
+void Screen::Display(Mesh const& mesh)
+{
+    
+}
+
 void Screen::Clear()
 {
     std::cout << "\033[2J\033[1;1H";

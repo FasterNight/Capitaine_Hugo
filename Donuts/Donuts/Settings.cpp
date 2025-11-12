@@ -18,6 +18,11 @@ Settings::Settings(int argc, char* argv[])
             mWidth = atoi(argv[i + 1]);
             i++;
         }
+        else if (arg == "-r" && i + 1 < argc)
+        {
+            mMeshResolution = atoi(argv[i + 1]);
+            i++;
+        }
         else
         {
             TextHelp();
@@ -30,6 +35,10 @@ Settings::Settings(int argc, char* argv[])
         TextHelp();
         return;
     }
+    else if (mMeshResolution == NULL)
+    {
+        mMeshResolution = 32;
+    }
 }
 
 int Settings::GetHeight()
@@ -40,6 +49,11 @@ int Settings::GetHeight()
 int Settings::GetWidth()
 {
 	return mWidth;
+}
+
+int Settings::GetResolution()
+{
+    return mMeshResolution;
 }
 
 void Settings::TextHelp()

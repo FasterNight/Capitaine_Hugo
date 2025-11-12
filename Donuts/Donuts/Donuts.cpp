@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
          { 1.f,  1.f, 0.f}
     };
 
-    Mesh mesh(test);
+    Mesh mesh(test, settings.GetResolution());
     mesh.Debug();
 }
 
