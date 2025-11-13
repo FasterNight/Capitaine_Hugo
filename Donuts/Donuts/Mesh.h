@@ -13,12 +13,13 @@ struct Vertex
 class Mesh
 {
 public:
+	Mesh();
 	Mesh(std::vector<Vertex> vertex, int resolution);
 
-	Mesh const& GenerateCircle(float radius);
-	Mesh const& GenerateHalfCircle(float radius);
-	Mesh const& GenerateRectangle(float width, float height);
-	Mesh const& GenerateSquare(float size);
+	void GenerateCircle(float radius);
+	void GenerateHalfCircle(float radius);
+	void GenerateRectangle(float width, float height);
+	void GenerateSquare(float size);
 
 	char* GetMesh();
 

@@ -9,7 +9,7 @@ Mesh::Mesh(std::vector<Vertex> vertex, int resolution)
 	}
 }
 
-Mesh const& Mesh::GenerateCircle(float radius)
+void Mesh::GenerateCircle(float radius)
 {
 	
 
@@ -30,42 +30,33 @@ Mesh const& Mesh::GenerateCircle(float radius)
 		mMesh += '\n';
 	}
 
-	return *this;
 }
 
-Mesh const& Mesh::GenerateHalfCircle(float radius)
+void Mesh::GenerateHalfCircle(float radius)
 {
 
 
 }
 
-Mesh const& Mesh::GenerateRectangle(float width, float height)
+void Mesh::GenerateRectangle(float width, float height)
 {
 
+	mVertex.resize(width + height);
 	for (int i = 1; i < width; i++) 
 	{
 		for (int j = 1; j < height; j++) 
 		{
-			mMesh += 'X';
+			mVertex[i + j].x = i;
+			mVertex[i + j].y = j;
+			mVertex[i + j].z = 0;
 		}
-		mMesh += '\n';
 	}
 
-	return *this;
 }
 
-Mesh const& Mesh::GenerateSquare(float size)
+void Mesh::GenerateSquare(float size)
 {
-	for (int i = 1; i < size; i++)
-	{
-		for (int j = 1; j < size; j++)
-		{
-			mMesh += 'X';
-		}
-		mMesh += '\n';
-	}
-
-	return *this;
+	GenerateRectangle(size, size);
 }
 
 char* Mesh::GetMesh()
@@ -75,9 +66,10 @@ char* Mesh::GetMesh()
 
 void Mesh::Debug()
 {
+	std::cout << "|=====================|DEBUG|=======================|" << std::endl;
+
 	for (int i = 0; i < mVertex.size(); i++)
 	{
-		std::cout << "|=====================|DEBUG|=======================|" << std::endl;
-		std::cout << BLUE << "Vertex " << i + 1 << DEFAULT << ": X = " << mVertex[i].x << ", Y = " << mVertex[i].y << ", Z = " << mVertex[i].z << std::endl;
+		std::cout << GREEN << "Vertex " << i + 1 << DEFAULT << ": X = " << mVertex[i].x << ", Y = " << mVertex[i].y << ", Z = " << mVertex[i].z << std::endl;
 	}
 }

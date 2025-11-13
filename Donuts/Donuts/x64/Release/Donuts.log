@@ -1,11 +1,16 @@
-﻿  Settings.cpp
-  Donuts.cpp
-  Mesh.cpp
-  Screen.cpp
-  pch.cpp
+﻿  Mesh.cpp
+C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.cpp(44,23): warning C4244: 'argument' : conversion de 'float' en 'const unsigned __int64', perte possible de données
+  (compiler le fichier source '/Mesh.cpp')
+  
+C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.cpp(49,23): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  (compiler le fichier source '/Mesh.cpp')
+  
+C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Mesh.cpp(50,23): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  (compiler le fichier source '/Mesh.cpp')
+  
   Génération de code en cours
-  4 of 165 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
+  2 of 173 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
   Donuts.vcxproj -> C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\x64\Release\Donuts.exe
