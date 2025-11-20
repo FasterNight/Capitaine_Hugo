@@ -36,7 +36,12 @@ void Screen::Display(Mesh const& mesh)
         tempVertices[i].y = (tempVertices[i].y * m_ScreenPosition) / tempVertices[i].z;
         tempVertices[i].x = (tempVertices[i].x * m_ScreenPosition) / tempVertices[i].z;
 
-        m_pixels[m_width * tempVertices[i].x + tempVertices[i].y, m_ScreenMeshProjection];
+        if (tempVertices[i].x )
+        {
+            int index;
+            m_pixels[index, m_ScreenMeshProjection];
+
+        }
     }
 
     Display();
