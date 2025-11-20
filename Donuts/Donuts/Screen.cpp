@@ -6,6 +6,11 @@ Screen::Screen(Settings const& settings)
     : m_width(settings.GetScreenWidth())
     , m_height(settings.GetScreenHeight())
     , m_pixels(m_width* m_height, '.')
+    , m_ScreenBackground(' ')
+    , m_ScreenMeshProjection('X')
+    ,m_ScreenPosition(3.33)
+    , m_MeshPosition(5)
+
 {
 }
 
@@ -19,4 +24,20 @@ void Screen::Display() const
         }
         std::cout << std::endl;
     }
+}
+
+void Screen::Display(Mesh const& mesh)
+{
+    std::vector<Vertex> tempVertices = mesh.GetVertices();
+
+    for (int i = 0; i < mesh.GetVertices().size(); i++)
+    {
+        tempVertices[i].z += m_MeshPosition;
+        tempVertices[i].y = (tempVertices[i].y * m_ScreenPosition) / tempVertices[i].z;
+        tempVertices[i].x = (tempVertices[i].x * m_ScreenPosition) / tempVertices[i].z;
+
+        m_pixels[m_width * tempVertices[i].x + tempVertices[i].y, m_ScreenMeshProjection];
+    }
+
+    Display();
 }

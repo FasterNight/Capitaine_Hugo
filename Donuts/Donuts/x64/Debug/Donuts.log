@@ -1,6 +1,4 @@
-﻿  Donuts.cpp
-  Mesh.cpp
-  Screen.cpp
-  Settings.cpp
-  Génération de code en cours...
+﻿  Screen.cpp
+C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Screen.cpp(11,22): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Screen.cpp(39,89): warning C4834: abandon de la valeur de retour de la fonction avec l’attribut [[nodiscard]]
   Donuts.vcxproj -> C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\x64\Debug\Donuts.exe
