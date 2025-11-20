@@ -1,75 +1,62 @@
-#include "pch.h"
+#include <cmath>
 #include "Mesh.h"
+#include "Settings.h"
 
-Mesh::Mesh(std::vector<Vertex> vertex, int resolution)
+constexpr float PI = 3.14159265f;
+
+Mesh::Mesh(Settings const& settings)
+    : m_resolution(settings.GetMeshResolution())
 {
-	for (int i = 0; i < vertex.size(); i++)
-	{
-		mVertex.push_back(vertex[i]);
-	}
 }
 
 void Mesh::GenerateCircle(float radius)
 {
-	
-
-	for (int i = 0; i <= 2 * radius; i++)
-	{
-		for (int j = 0; j <= 2 * radius; j++)
-		{
-			double distance = sqrt((double)(i - radius) * (i - radius) + (j - radius) * (j - radius));
-			if (distance > radius - 0.65 && distance < radius + 0.2)
-			{
-				mMesh += 'X';
-			}
-			else
-			{
-				mMesh += ' ';
-			}
-		}
-		mMesh += '\n';
-	}
-
+    _GenerateSector(radius, 2 * PI);
 }
 
 void Mesh::GenerateHalfCircle(float radius)
 {
-
-
+    _GenerateSector(radius, PI);
 }
 
 void Mesh::GenerateRectangle(float width, float height)
 {
-
-	mVertex.resize(width + height);
-	for (int i = 1; i < width; i++) 
-	{
-		for (int j = 1; j < height; j++) 
-		{
-			mVertex[i + j].x = i;
-			mVertex[i + j].y = j;
-			mVertex[i + j].z = 0;
-		}
-	}
-
+    m_vertices.resize(m_resolution * m_resolution);
+    for (int i = 0; i < m_resolution; i++)
+    {
+        for (int j = 0; j < m_resolution; j++)
+        {
+            m_vertices[m_resolution * i + j].x = (1.f * i / (m_resolution - 1) - 0.5f) * width;
+            m_vertices[m_resolution * i + j].y = (1.f * j / (m_resolution - 1) - 0.5f) * height;
+            m_vertices[m_resolution * i + j].z = 0.f;
+        }
+    }
+}
+void Mesh::GenerateSquare(float side)
+{
+    GenerateRectangle(side, side);
 }
 
-void Mesh::GenerateSquare(float size)
+void Mesh::Debug() const
 {
-	GenerateRectangle(size, size);
+    for (Vertex const& vertex : m_vertices)
+    {
+        vertex.Debug();
+    }
 }
 
-char* Mesh::GetMesh()
+void Mesh::_GenerateSector(float radius, float angle)
 {
-	return mMesh;
-}
-
-void Mesh::Debug()
-{
-	std::cout << "|=====================|DEBUG|=======================|" << std::endl;
-
-	for (int i = 0; i < mVertex.size(); i++)
-	{
-		std::cout << GREEN << "Vertex " << i + 1 << DEFAULT << ": X = " << mVertex[i].x << ", Y = " << mVertex[i].y << ", Z = " << mVertex[i].z << std::endl;
-	}
+    m_vertices.resize(m_resolution * m_resolution);
+    for (int i = 0; i < m_resolution; i++)
+    {
+        float r = (radius * i) / (m_resolution - 1);
+        for (int j = 0; j < m_resolution; j++)
+        {
+            float theta = (angle * j) / (m_resolution - 1);
+            m_vertices[m_resolution * i + j].x = r * std::cos(theta);
+            m_vertices[m_resolution * i + j].y = r * std::sin(theta);
+            m_vertices[m_resolution * i + j].z = 0.f;
+        }
+    }
 }

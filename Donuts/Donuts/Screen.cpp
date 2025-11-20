@@ -1,63 +1,22 @@
-#include "pch.h"
+#include <iostream>
 #include "Screen.h"
+#include "Settings.h"
 
-Screen::Screen()
+Screen::Screen(Settings const& settings)
+    : m_width(settings.GetScreenWidth())
+    , m_height(settings.GetScreenHeight())
+    , m_pixels(m_width* m_height, '.')
 {
 }
 
-Screen::Screen(int height, int width)
+void Screen::Display() const
 {
-    mHeight = height;
-    mWidth = width;
-
-    for (int i = 1; i < mHeight; i++) // Hauteur
+    for (int i = 0; i < m_height; i++)
     {
-        for (int j = 1; j < mWidth; j++) // Largeur 
+        for (int j = 0; j < m_width; j++)
         {
-            std::cout << ".";
+            std::cout << m_pixels[m_width * i + j];
         }
-        std::cout << "\n";
+        std::cout << std::endl;
     }
-}
-
-void Screen::Display()
-{
-    for (int i = 1; i < mHeight; i++) // Hauteur
-    {
-        for (int j = 1; j < mWidth; j++) // Largeur 
-        {
-            std::cout << ".";
-        }
-        std::cout << "\n";
-    }
-}
-
-void Screen::Display(Mesh const& mesh)
-{
-    
-}
-
-void Screen::Clear()
-{
-    std::cout << "\033[2J\033[1;1H";
-}
-
-void Screen::SetHeight(int height)
-{
-    mHeight = height;
-}
-
-void Screen::SetWidth(int width)
-{
-    mWidth = width;
-}
-
-int Screen::GetHeight()
-{
-    return mHeight;
-}
-
-int Screen::GetWidth()
-{
-    return mWidth;
 }

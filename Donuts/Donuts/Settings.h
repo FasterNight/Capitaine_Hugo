@@ -1,24 +1,18 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#pragma once
 
 class Settings
 {
 public:
-	Settings(int argc, char* argv[]);
-
-	int GetHeight();
-	int GetWidth();
-	int GetResolution();
-
-	void TextHelp();
-
+    Settings(int argc, char** argv);
+    int GetScreenWidth() const { return m_screenWidth; }
+    int GetScreenHeight() const { return m_screenHeight; }
+    int GetMeshResolution() const { return m_meshResolution; }
 
 private:
+    void _ParseArguments(int argc, char** argv);
 
-	int mHeight;
-	int mWidth;
-	int mMeshResolution;
+private:
+    int m_screenWidth;
+    int m_screenHeight;
+    int m_meshResolution;
 };
-
-
-#endif // !SETTINGS_H

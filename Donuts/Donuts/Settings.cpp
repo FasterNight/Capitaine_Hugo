@@ -1,66 +1,34 @@
-#include "pch.h"
 #include "Settings.h"
+#include <string>
 
-
-Settings::Settings(int argc, char* argv[])
+Settings::Settings(int argc, char** argv)
+    : m_screenWidth(100)
+    , m_screenHeight(20)
+    , m_meshResolution(32)
 {
-    for (int i = 1; i < argc; ++i)
+    _ParseArguments(argc, argv);
+}
+
+void Settings::_ParseArguments(int argc, char** argv)
+{
+    // Elegant solution from @T.Rosselet
+    for (int i = 1; i < argc; i++) //i starts at 1 because command line arguments start with argv[1] (argv[0] is the name of the exe)
     {
         std::string arg = argv[i];
-
-        if (arg == "-h" && i + 1 < argc)
+        if (arg == "-w" && i + 1 < argc)
         {
-            mHeight = atoi(argv[i + 1]);
+            m_screenWidth = std::atoi(argv[i + 1]);
             i++;
         }
-        else if (arg == "-w" && i + 1 < argc)
+        else if (arg == "-h" && i + 1 < argc)
         {
-            mWidth = atoi(argv[i + 1]);
+            m_screenHeight = std::atoi(argv[i + 1]);
             i++;
         }
         else if (arg == "-r" && i + 1 < argc)
         {
-            mMeshResolution = atoi(argv[i + 1]);
+            m_meshResolution = std::atoi(argv[i + 1]);
             i++;
         }
-        else
-        {
-            TextHelp();
-            return;
-        }
-    }
-
-    if (mHeight == NULL || mWidth == NULL)
-    {
-        TextHelp();
-        return;
-    }
-    else if (mMeshResolution == NULL)
-    {
-        mMeshResolution = 32;
     }
 }
-
-int Settings::GetHeight()
-{
-	return mHeight;
-}
-
-int Settings::GetWidth()
-{
-	return mWidth;
-}
-
-int Settings::GetResolution()
-{
-    return mMeshResolution;
-}
-
-void Settings::TextHelp()
-{
-	std::cout << "|=====================|HELP|=======================|" << std::endl;
-	std::cout << "Use " << RED << "-h " << DEFAULT << "for set the height and " << RED << "-w " DEFAULT << "for set the width !" << std::endl;
-	std::cout << "\n";
-	std::cout << GREEN << "[EXEMPLE] -h 20 -w 100" << DEFAULT << std::endl;
-}
-

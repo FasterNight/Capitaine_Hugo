@@ -1,30 +1,16 @@
-#ifndef SCREEN_H
-#define SCREEN_H
+#pragma once
+#include <vector>
 
-#include "Mesh.h"
+class Settings;
 
 class Screen
 {
-
 public:
-	Screen();
-	Screen(int height, int width);
+    Screen(Settings const& settings);
+    void Display() const;
 
-	void Display();
-	void Display(Mesh const& mesh);
-	void Clear();
-
-	void SetHeight(int height);
-	void SetWidth(int width);
-
-	int GetHeight();
-	int GetWidth();
 private:
-
-	int mHeight;
-	int mWidth;
+    int m_width;
+    int m_height;
+    std::vector<char> m_pixels;
 };
-#endif // !SCREEN_H
-
-
-
