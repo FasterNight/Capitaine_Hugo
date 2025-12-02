@@ -1,22 +1,30 @@
 #pragma once
-#include "Mesh.h"
 #include <vector>
 
 class Settings;
+class Mesh;
+struct Vertex;
 
 class Screen
 {
-public:
+    public:
     Screen(Settings const& settings);
     void Display() const;
     void Display(Mesh const& mesh);
 
-private:
+    private:
+    void _ProjectMesh(Mesh const& mesh);
+    void _ProjectInCenterScreenSpace(Vertex& vertex);
+    void _ProjectInTopLeftScreenSpace(Vertex& vertex);
+    bool _IsVertexInScreen(int u, int v);
+
+    private:
     int m_width;
     int m_height;
+    float m_zPosition;
+    char m_background;
+    char m_meshProjection;
+    float m_meshZPosition;
     std::vector<char> m_pixels;
-    char m_ScreenBackground;
-    char m_ScreenMeshProjection;
-    float m_ScreenPosition;
-    float m_MeshPosition;
+    std::vector<float> m_oozBuffer;
 };
