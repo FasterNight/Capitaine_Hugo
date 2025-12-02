@@ -60,3 +60,10 @@ void Mesh::_GenerateSector(float radius, float angle)
         }
     }
 }
+
+void Vertex::Rotate(float angle, Axis axis)
+{
+
+    Mesh previous = *this;
+
+}
