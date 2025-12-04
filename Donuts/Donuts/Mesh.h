@@ -30,8 +30,11 @@ class Mesh
     void GenerateHalfCircle(float radius);
     void GenerateRectangle(float width, float height);
     void GenerateSquare(float side);
+    void GenerateTorus(float majorRadius, float minorRadius);
     void Debug() const;
 
+    void Rotate(float angle, Axis axis);
+   
     private:
     void _GenerateSector(float radius, float angle);
 

@@ -37,6 +37,11 @@ void Mesh::GenerateSquare(float side)
     GenerateRectangle(side, side);
 }
 
+void Mesh::GenerateTorus(float majorRadius, float minorRadius)
+{
+
+}
+
 void Mesh::Debug() const
 {
     for(Vertex const& vertex : m_vertices)
@@ -64,6 +69,37 @@ void Mesh::_GenerateSector(float radius, float angle)
 void Vertex::Rotate(float angle, Axis axis)
 {
 
-    Mesh previous = *this;
+   Vertex previous = *this;
+   switch (axis)
+   {
+   case Axis::X:
+   {
+       y = previous.y * std::cos(angle) - previous.z * std::sin(angle);
+       z = previous.y * std::sin(angle) + previous.z * std::cos(angle);
+   }
+       break;
+   case Axis::Y:
+   {
+       x = previous.x * std::cos(angle) + previous.z * std::sin(angle);
+       z = -previous.x * std::sin(angle) + previous.z * std::cos(angle);
+   }
+       break;
+   case Axis::Z:
+   {
+       x = previous.x * std::cos(angle) - previous.y * std::sin(angle);
+       y = previous.x * std::sin(angle) + previous.y * std::cos(angle);
+   }
+       break;
+   default:
+       break;
+   }
 
+}
+
+void Mesh::Rotate(float angle, Axis axis)
+{
+    for (Vertex& v : m_vertices)
+    {
+        v.Rotate(angle, axis);
+    }
 }
