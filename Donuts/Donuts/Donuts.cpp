@@ -31,18 +31,17 @@ void SetCursorVisible(bool visible)
     }
 }
 
-
 void OnKill(int signum)
 {
-    ClearConsole();
     SetCursorVisible(true);
+    ClearConsole();
     exit(signum);
 }
 
 int main(int argc, char** argv)
 {
     signal(SIGINT, OnKill);
-    
+
     InitConsole();
     ClearConsole();
     SetCursorVisible(false);
@@ -50,27 +49,14 @@ int main(int argc, char** argv)
     Screen screen(settings);
     screen.Display();
     Mesh mesh(settings);
-    /*mesh.GenerateRectangle(10.f, 20.f);
-    std::cout << "Rectangle 10x20:" << std::endl;
-    screen.Display(mesh);
-    mesh.GenerateSquare(20.f);
-    std::cout << "Square 20x20:" << std::endl;
-    screen.Display(mesh);
-    mesh.GenerateCircle(15.f);
-    std::cout << "Circle radius 15:" << std::endl;
-    screen.Display(mesh);
-    mesh.GenerateHalfCircle(15.f);
-    std::cout << "Half Circle radius 15:" << std::endl;*/
-    //mesh.Rotate(90.0f, Axis::Z);
-    //screen.Display(mesh);
-    
-
     mesh.GenerateTorus(4,0.9f);
     while (true)
     {
         std::cout << "\x1b[H";
         mesh.Rotate(settings.GetMeshRotationXPerFrame(), Axis::X);
+        mesh.Rotate(settings.GetMeshRotationYPerFrame(), Axis::Y);
         screen.Display(mesh);
+        Sleep(1);
     }
     return 0;
 }
