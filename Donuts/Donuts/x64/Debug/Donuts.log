@@ -1,2 +1,12 @@
-﻿  Mesh.cpp
-  Donuts.vcxproj -> C:\Users\hcapitaine\Documents\GitHub\Capitaine_Hugo\Donuts\x64\Debug\Donuts.exe
+﻿  Donuts.cpp
+  Mesh.cpp
+  Screen.cpp
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Screen.cpp(45,15): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Screen.cpp(46,15): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+  Settings.cpp
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Settings.cpp(44,41): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\Donuts\Settings.cpp(54,39): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+  Génération de code en cours...
+  Donuts.vcxproj -> C:\Users\hugoc\OneDrive\Documents\GitHub\Capitaine_Hugo\Donuts\x64\Debug\Donuts.exe
+  'pwsh.exe' n'est pas reconnu en tant que commande interne
+  ou externe, un programme exécutable ou un fichier de commandes.

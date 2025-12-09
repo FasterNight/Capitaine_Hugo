@@ -39,7 +39,29 @@ void Mesh::GenerateSquare(float side)
 
 void Mesh::GenerateTorus(float majorRadius, float minorRadius)
 {
+    m_vertices.resize(m_resolution * m_resolution);
 
+    for (int i = 0; i < m_resolution; i++)
+    {
+        float u = (2.0f * PI * i) / (m_resolution - 1);  
+        float cosU = std::cos(u);
+        float sinU = std::sin(u);
+
+        for (int j = 0; j < m_resolution; j++)
+        {
+            float v = (2.0f * PI * j) / (m_resolution - 1);
+            float cosV = std::cos(v);
+            float sinV = std::sin(v);
+
+            float x = (majorRadius + minorRadius * cosV) * cosU;
+            float y = (majorRadius + minorRadius * cosV) * sinU;
+            float z = minorRadius * sinV;
+
+            m_vertices[m_resolution * i + j].x = x;
+            m_vertices[m_resolution * i + j].y = y;
+            m_vertices[m_resolution * i + j].z = z;
+        }
+    }
 }
 
 void Mesh::Debug() const
