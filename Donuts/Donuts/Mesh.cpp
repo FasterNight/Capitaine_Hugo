@@ -5,7 +5,7 @@
 constexpr float PI = 3.14159265f;
 
 Mesh::Mesh(Settings const& settings)
-: m_resolution(settings.GetMeshResolution())
+: m_resolution(settings.GetMeshResolution()), m_meshPosition(settings.GetMeshPosition())
 {
 }
 
@@ -55,7 +55,7 @@ void Mesh::GenerateTorus(float majorRadius, float minorRadius)
 
             float x = (majorRadius + minorRadius * cosV) * cosU;
             float y = (majorRadius + minorRadius * cosV) * sinU;
-            float z = minorRadius * sinV;
+            float z = minorRadius * sinV ;
 
             m_vertices[m_resolution * i + j].x = x;
             m_vertices[m_resolution * i + j].y = y;

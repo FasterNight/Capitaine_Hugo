@@ -41,4 +41,5 @@ class Mesh
     private:
     std::vector<Vertex> m_vertices;
     int m_resolution;
+    int m_meshPosition;
 };
