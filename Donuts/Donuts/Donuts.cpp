@@ -48,13 +48,36 @@ int main(int argc, char** argv)
     Settings settings(argc, argv);
     Screen screen(settings);
     screen.Display();
+
     Mesh mesh(settings);
-    mesh.GenerateTorus(4,0.9f);
+    mesh.GenerateTorus(5,1.2f);
+
+    DWORD lastSwitch = GetTickCount();
+    bool switchRotate = false;
+
     while (true)
     {
         std::cout << "\x1b[H";
-        mesh.Rotate(settings.GetMeshRotationXPerFrame(), Axis::X);
-        mesh.Rotate(settings.GetMeshRotationYPerFrame(), Axis::Y);
+
+        DWORD now = GetTickCount();
+
+        if (now - lastSwitch >= 5000)
+        {
+            switchRotate = !switchRotate;
+            lastSwitch = now; 
+        }
+
+        if (!switchRotate)
+        {
+            mesh.Rotate(settings.GetMeshRotationXPerFrame(), Axis::X);
+            mesh.Rotate(settings.GetMeshRotationYPerFrame(), Axis::Y);
+        }
+        else
+        {
+            mesh.Rotate(settings.GetMeshRotationXPerFrame(), Axis::X);
+            mesh.Rotate(settings.GetMeshRotationZPerFrame(), Axis::Z);
+        }
+
         screen.Display(mesh);
         Sleep(1);
     }

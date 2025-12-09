@@ -18,6 +18,8 @@ class Screen
     void _ProjectInTopLeftScreenSpace(Vertex& vertex);
     bool _IsVertexInScreen(int u, int v);
 
+    char _DepthToChar(float z);
+    
     private:
     int m_width;
     int m_height;

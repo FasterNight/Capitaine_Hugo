@@ -48,7 +48,7 @@ void Screen::_ProjectMesh(Mesh const& mesh)
         if(_IsVertexInScreen(u, v) && ooz > m_oozBuffer[v * m_width + u])
         {
             m_oozBuffer[v * m_width + u] = ooz;
-            m_pixels[v * m_width + u] = m_meshProjection;
+            m_pixels[v * m_width + u] = _DepthToChar(vertex.z);
         }
     }
 }
@@ -69,4 +69,12 @@ void Screen::_ProjectInTopLeftScreenSpace(Vertex& vertex)
 bool Screen::_IsVertexInScreen(int u, int v)
 {
     return u >= 0 && u < m_width && v >= 0 && v < m_height;
+}
+
+char Screen::_DepthToChar(float z)
+{
+    if (z < 5) return '@';        
+    if (z < 8) return 'O';        
+    if (z < 11) return 'o';        
+    return '.';                   
 }
