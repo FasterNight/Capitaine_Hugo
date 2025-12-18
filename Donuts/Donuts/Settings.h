@@ -15,6 +15,9 @@ class Settings
     float GetMeshRotationYPerFrame() const { return m_meshRotationYPerFrame; }
     float GetMeshRotationZPerFrame() const { return m_meshRotationZPerFrame; }
     float GetFrameDuration() const { return m_FrameDuration; }
+    float GetLightX() const { return m_LuminanceX; }
+    float GetLightY() const { return m_LuminanceY; }
+    float GetLightZ() const { return m_LuminanceZ; }
 
     private:
     void _ParseArguments(int argc, char** argv);
@@ -31,4 +34,7 @@ class Settings
     float m_meshRotationYPerFrame;
     float m_meshRotationZPerFrame;
     float m_FrameDuration;
+    float m_LuminanceX;
+    float m_LuminanceY;
+    float m_LuminanceZ;
 };

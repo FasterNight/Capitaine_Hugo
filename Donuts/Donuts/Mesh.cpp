@@ -1,6 +1,7 @@
 #include <cmath>
 #include "Mesh.h"
 #include "Settings.h"
+#include "Light.h"
 
 constexpr float PI = 3.14159265f;
 
@@ -29,6 +30,10 @@ void Mesh::GenerateRectangle(float width, float height)
             m_vertices[m_resolution * i + j].x = (1.f*i / (m_resolution - 1) - 0.5f) * width;
             m_vertices[m_resolution * i + j].y = (1.f*j / (m_resolution - 1) - 0.5f) * height;
             m_vertices[m_resolution * i + j].z = 0.f;
+
+            m_vertices[m_resolution * i + j].nx = 0.f;
+            m_vertices[m_resolution * i + j].ny = 0.f;
+            m_vertices[m_resolution * i + j].nz = -1.f;
         }
     }
 }
@@ -60,6 +65,11 @@ void Mesh::GenerateTorus(float majorRadius, float minorRadius)
             m_vertices[m_resolution * i + j].x = x;
             m_vertices[m_resolution * i + j].y = y;
             m_vertices[m_resolution * i + j].z = z;
+
+            // Normes
+            m_vertices[m_resolution * i + j].nx = cosV;
+            m_vertices[m_resolution * i + j].ny = sinV;
+            m_vertices[m_resolution * i + j].nz = z;
         }
     }
 }
@@ -84,6 +94,14 @@ void Mesh::_GenerateSector(float radius, float angle)
             m_vertices[m_resolution * i + j].x = r * std::cos(theta);
             m_vertices[m_resolution * i + j].y = r * std::sin(theta);
             m_vertices[m_resolution * i + j].z = 0.f;
+
+
+            m_vertices[m_resolution * i + j].nx = std::cos(theta);
+            m_vertices[m_resolution * i + j].ny = std::sin(theta);
+            m_vertices[m_resolution * i + j].nz = 0.f;
+
+
+
         }
     }
 }
@@ -98,24 +116,37 @@ void Vertex::Rotate(float angle, Axis axis)
    {
        y = previous.y * std::cos(angle) - previous.z * std::sin(angle);
        z = previous.y * std::sin(angle) + previous.z * std::cos(angle);
+       ny = previous.ny * std::cos(angle) - previous.nz * std::sin(angle);
+       nz = previous.ny * std::sin(angle) + previous.nz * std::cos(angle);
    }
        break;
    case Axis::Y:
    {
        x = previous.x * std::cos(angle) + previous.z * std::sin(angle);
        z = -previous.x * std::sin(angle) + previous.z * std::cos(angle);
+       nx = previous.nx * std::cos(angle) + previous.nz * std::sin(angle);
+       nz = -previous.nx * std::sin(angle) + previous.nz * std::cos(angle);
    }
        break;
    case Axis::Z:
    {
        x = previous.x * std::cos(angle) - previous.y * std::sin(angle);
        y = previous.x * std::sin(angle) + previous.y * std::cos(angle);
+       nx = previous.nx * std::cos(angle) - previous.ny * std::sin(angle);
+       ny = previous.nx * std::sin(angle) + previous.ny * std::cos(angle);
    }
        break;
    default:
        break;
    }
 
+}
+
+void Vertex::ComputeIllumination(Light const& light) const
+{
+    
+    
+    return;
 }
 
 void Mesh::Rotate(float angle, Axis axis)
