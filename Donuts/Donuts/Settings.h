@@ -37,4 +37,5 @@ class Settings
     float m_lightDirectionY;
     float m_lightDirectionZ;
     int m_frameDuration;
+
 };

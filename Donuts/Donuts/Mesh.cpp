@@ -99,6 +99,87 @@ void Mesh::GenerateTorus(float majorRadius, float minorRadius)
     }
 }
 
+void Mesh::GenerateCylinder(float radius, float height)
+{
+    m_vertices.clear();
+    m_vertices.reserve(m_resolution * m_resolution * 3);
+
+    for (int i = 0; i < m_resolution; ++i)
+    {
+        float y = height * (float(i) / (m_resolution - 1) - 0.5f); 
+        float normalizedHeight = (y + height / 2.f) / height;
+        int colorIdx = std::min(int(normalizedHeight * 12.f), 11);
+
+        for (int j = 0; j < m_resolution; ++j)
+        {
+            float angle = 2.f * M_PI * j / (m_resolution - 1);
+
+            Vertex v;
+            v.x = radius * std::cos(angle);
+            v.y = y;
+            v.z = radius * std::sin(angle);
+
+            v.nx = std::cos(angle);
+            v.ny = 0.f;
+            v.nz = std::sin(angle);
+
+            v.colorANSI = m_ansiColors[colorIdx];
+
+            m_vertices.push_back(v);
+        }
+    }
+    for (int i = 0; i < m_resolution; ++i)
+    {
+        float r = radius * i / (m_resolution - 1);
+        float y = -height / 2.f;
+        float normalizedHeight = (y + height / 2.f) / height; 
+        int colorIdx = std::min(int(normalizedHeight * 12.f), 11);
+
+        for (int j = 0; j < m_resolution; ++j)
+        {
+            float angle = 2.f * M_PI * j / (m_resolution - 1);
+
+            Vertex v;
+            v.x = r * std::cos(angle);
+            v.y = y;
+            v.z = r * std::sin(angle);
+
+            v.nx = 0.f;
+            v.ny = -1.f;
+            v.nz = 0.f;
+
+            v.colorANSI = m_ansiColors[colorIdx];
+
+            m_vertices.push_back(v);
+        }
+    }
+
+    for (int i = 0; i < m_resolution; ++i)
+    {
+        float r = radius * i / (m_resolution - 1);
+        float y = height / 2.f; 
+        float normalizedHeight = (y + height / 2.f) / height;
+        int colorIdx = std::min(int(normalizedHeight * 12.f), 11);
+
+        for (int j = 0; j < m_resolution; ++j)
+        {
+            float angle = 2.f * M_PI * j / (m_resolution - 1);
+
+            Vertex v;
+            v.x = r * std::cos(angle);
+            v.y = y;
+            v.z = r * std::sin(angle);
+
+            v.nx = 0.f;
+            v.ny = 1.f;
+            v.nz = 0.f;
+
+            v.colorANSI = m_ansiColors[colorIdx];
+
+            m_vertices.push_back(v);
+        }
+    }
+}
 void Mesh::Rotate(float angle, Axis axis)
 {
     for(Vertex& vertex : m_vertices)

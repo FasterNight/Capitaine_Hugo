@@ -13,6 +13,7 @@ Screen::Screen(Settings const& settings)
 , m_meshProjection(settings.GetScreenMeshProjection())
 , m_meshZPosition(settings.GetMeshPosition())
 , m_pixels(m_width * m_height, '.')
+, m_pixelsColor(m_width* m_height, "\033[0m") 
 , m_oozBuffer(m_width * m_height, 0.f)
 {
 }
@@ -23,7 +24,9 @@ void Screen::Display() const
     {
         for(int j = 0; j < m_width; j++)
         {
-            std::cout << m_pixels[m_width * i + j];
+            int index = i * m_width + j;
+            std::cout << m_pixelsColor[index] << m_pixels[index] << "\033[0m";
+
         }
         std::cout << std::endl;
     }
@@ -32,6 +35,7 @@ void Screen::Display() const
 void Screen::Display(Mesh const& mesh, Light const& light)
 {
     std::fill(m_pixels.begin(), m_pixels.end(), m_background);
+    std::fill(m_pixelsColor.begin(), m_pixelsColor.end(), "\033[0m");
     _ProjectMesh(mesh, light);
     Display();
 }
@@ -39,28 +43,35 @@ void Screen::Display(Mesh const& mesh, Light const& light)
 void Screen::_ProjectMesh(Mesh const& mesh, Light const& light)
 {
     std::fill(m_oozBuffer.begin(), m_oozBuffer.end(), 0.f);
-    for(Vertex vertex : mesh.GetVertices())
+
+    for (Vertex vertex : mesh.GetVertices())
     {
         _ProjectInCenterScreenSpace(vertex);
         _ProjectInTopLeftScreenSpace(vertex);
+
         int u = std::round(vertex.x);
         int v = std::round(vertex.y);
         float ooz = 1.f / vertex.z;
-        if(_IsVertexInScreen(u, v) && ooz > m_oozBuffer[v * m_width + u])
+
+        if (_IsVertexInScreen(u, v) && ooz > m_oozBuffer[v * m_width + u])
         {
             float illumination = vertex.ComputeIllumination(light);
             m_oozBuffer[v * m_width + u] = ooz;
-            if(illumination >= 0.f)
+            if (illumination >= 0.f)
             {
-                m_pixels[v * m_width + u] = ".,-~:;=!X#$@"[(int)(illumination*12)];
+                m_pixels[v * m_width + u] = ".,-~:;=!X#$@"[(int)(illumination * 12)];
             }
             else
             {
                 m_pixels[v * m_width + u] = '.';
             }
+
+            m_pixelsColor[v * m_width + u] = vertex.colorANSI;
+            m_oozBuffer[v * m_width + u] = ooz;
         }
     }
 }
+
 
 void Screen::_ProjectInCenterScreenSpace(Vertex& vertex)
 {
