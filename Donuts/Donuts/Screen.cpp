@@ -3,6 +3,7 @@
 #include "Screen.h"
 #include "Settings.h"
 #include "Mesh.h"
+#include "Light.h"
 
 Screen::Screen(Settings const& settings)
 : m_width(settings.GetScreenWidth())
@@ -28,14 +29,14 @@ void Screen::Display() const
     }
 }
 
-void Screen::Display(Mesh const& mesh)
+void Screen::Display(Mesh const& mesh, Light const& light)
 {
     std::fill(m_pixels.begin(), m_pixels.end(), m_background);
-    _ProjectMesh(mesh);
+    _ProjectMesh(mesh, light);
     Display();
 }
 
-void Screen::_ProjectMesh(Mesh const& mesh)
+void Screen::_ProjectMesh(Mesh const& mesh, Light const& light)
 {
     std::fill(m_oozBuffer.begin(), m_oozBuffer.end(), 0.f);
     for(Vertex vertex : mesh.GetVertices())
@@ -47,8 +48,16 @@ void Screen::_ProjectMesh(Mesh const& mesh)
         float ooz = 1.f / vertex.z;
         if(_IsVertexInScreen(u, v) && ooz > m_oozBuffer[v * m_width + u])
         {
+            float illumination = vertex.ComputeIllumination(light);
             m_oozBuffer[v * m_width + u] = ooz;
-            m_pixels[v * m_width + u] = _DepthToChar(vertex.z);
+            if(illumination >= 0.f)
+            {
+                m_pixels[v * m_width + u] = ".,-~:;=!X#$@"[(int)(illumination*12)];
+            }
+            else
+            {
+                m_pixels[v * m_width + u] = '.';
+            }
         }
     }
 }
@@ -68,13 +77,5 @@ void Screen::_ProjectInTopLeftScreenSpace(Vertex& vertex)
 
 bool Screen::_IsVertexInScreen(int u, int v)
 {
-    return u >= 0 && u < m_width && v >= 0 && v < m_height;
-}
-
-char Screen::_DepthToChar(float z)
-{
-    if (z < 5) return '@';        
-    if (z < 8) return 'O';        
-    if (z < 11) return 'o';        
-    return '.';                   
+    return u > 0 && u < m_width && v > 0 && v < m_height;
 }
